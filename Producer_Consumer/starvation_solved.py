@@ -1,3 +1,4 @@
+
 from threading import Thread
 import time
 
@@ -10,6 +11,8 @@ def Producer(x):
     cedric1 = 0
     for i in range(10):
         global cedric
+        while cedric != 0:
+            time.sleep(0.1)
         cedric1 = cedric1 + 1
         cedric = cedric1
         print("prod",cedric)
@@ -38,6 +41,5 @@ t.start()
 time.sleep(0.1)
 t=Thread(target=Consumer, args=("Consumer", ))
 t.start()
-
 
 
