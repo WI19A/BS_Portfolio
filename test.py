@@ -1,1 +1,1 @@
-print("Hallo ghz!")
+print("Hallo zsm!")
