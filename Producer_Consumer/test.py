@@ -19,7 +19,7 @@ class Prod:
                 q.put(g)
                 print("Added: {}".format(f))
                 print("Added: {}".format(g))
-                self.next += random.random()+10
+                self.next += random.random()*10
 
 class Comnsumer:
     def __init__(self):
@@ -27,13 +27,13 @@ class Comnsumer:
 
     def run(self):
         global q
-        for i in range(100):
+        for i in range(200):
             time.sleep(0.1)
             print('Queue size: {}'.format(q.qsize()))
             if (self.next <= i and not q.empty()):
                 f = q.get()
                 print("Remove: {}".format(f))
-                self.next += random.random()+10
+                self.next += random.random()*10
             elif q.empty():
                 print('Consumer is waiting for product!')
 
