@@ -11,7 +11,7 @@ def Producer1(x):
     #System Out
     print("Start Thread%s" % x)
     cedric1 = 0
-    for i in range(20):
+    for _ in range(20):
         global cedric
         global prod1
         while prod1 != 0:
@@ -26,7 +26,7 @@ def Producer2(x):
     #System Out
     print("Start Thread%s" % x)
     cedric2 = 0
-    for i in range(20):
+    for _ in range(20):
         global justin
         global prod2
         while prod2 != 0:
@@ -41,7 +41,7 @@ def Producer2(x):
 def Consumer1(x):
     #System Out
     print("Start Thread%s" % x)
-    for i in range(10):
+    for _ in range(10):
         global cedric
         global justin
         global markus
@@ -65,7 +65,7 @@ def Consumer1(x):
 def Consumer2(x):
     #System Out
     print("Start Thread%s" % x)
-    for i in range(10):
+    for _ in range(10):
         global cedric
         global justin
         global simon

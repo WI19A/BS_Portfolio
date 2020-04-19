@@ -8,7 +8,7 @@ def Producer(x):
     #System Out
     print("Start Thread%s" % x)
     cedric1 = 0
-    for i in range(10):
+    for _ in range(10):
         global cedric
         cedric1 = cedric1 + 1
         cedric = cedric1
@@ -19,7 +19,7 @@ def Producer(x):
 def Consumer(x):
     #System Out
     print("Start Thread%s" % x)
-    for i in range(10):
+    for _ in range(10):
         global cedric
         global markus
         while cedric == 0:
