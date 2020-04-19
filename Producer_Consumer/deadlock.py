@@ -25,14 +25,14 @@ def Producer1(x):
 def Producer2(x):
     #System Out
     print("Start Thread%s" % x)
-    cedric2 = 0
+    justin1 = 0
     for _ in range(20):
         global justin
         global prod2
         while prod2 != 0:
             time.sleep(0.1)
-        cedric2 = cedric2 + 1
-        justin = cedric2
+        justin1 = justin1 + 1
+        justin = justin1
         prod2 = 1
         print("prod",cedric)
     print("Stop Thread%s" % x)

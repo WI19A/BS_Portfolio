@@ -9,6 +9,10 @@ def Producer(x):
     for _ in range(100000):
         inc()
     #print("Stop Thread%s" % x)
+
+def Consumer(x):
+    global cedric
+    print(cedric)
     
 def inc():
     global cedric
@@ -28,9 +32,11 @@ def start():
 
     t1.join()
     t2.join()
+    t3=Thread(target=Consumer, args=("Consumer", ))
+    t3.start()
 
     
 
 for i in range(10):
     start()
-    print("Iteration",i, cedric)
+    #print("Iteration",i, cedric)

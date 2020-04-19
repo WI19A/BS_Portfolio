@@ -10,6 +10,7 @@ def Producer(x):
     cedric1 = 0
     for _ in range(10):
         global cedric
+        time.sleep(1)
         cedric1 = cedric1 + 1
         cedric = cedric1
         print("prod",cedric)
@@ -23,7 +24,8 @@ def Consumer(x):
         global cedric
         global markus
         while cedric == 0:
-            time.sleep(0.1)
+            time.sleep(0.5)
+            print("Ich verhungere")
         markus = markus+ cedric
         cedric = 0
         print("cons",markus)
