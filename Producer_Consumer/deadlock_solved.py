@@ -44,19 +44,19 @@ class Consumer1:
         global q1
         global q2
         while True:
-            sema2.acquire()
+            sema1.acquire()
             print('Queue1 size: {}'.format(q1.qsize()))
-            if (not q2.empty()):
-                f = q2.get()
+            if (not q1.empty()):
+                f = q1.get()
                 print("Remove: {}".format(f))
                 time.sleep(random.random()*1)
             else:
                 print('Consumer is waiting for product!')
-            sema1.acquire()
+            sema2.acquire()
             #Random Cosumzeit(0-2 Sekunden)
             print('Queue2 size: {}'.format(q2.qsize()))
-            if (not q1.empty()):
-                f = q1.get()
+            if (not q2.empty()):
+                f = q2.get()
                 print("Remove: {}".format(f))
                 time.sleep(random.random()*1)
             else:
