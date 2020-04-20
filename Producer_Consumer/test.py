@@ -27,7 +27,7 @@ class Comnsumer:
 
     def run(self):
         global q
-        for i in range(200):
+        for i in range(100):
             time.sleep(0.1)
             print('Queue size: {}'.format(q.qsize()))
             if (self.next <= i and not q.empty()):
