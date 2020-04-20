@@ -10,7 +10,7 @@ class Producer:
     def run(self):
         global q
         while True:
-            #Random Produktionszeit(0-10 sekunden)
+            #Random Produktionszeit(0-3 sekunden)
             time.sleep(random.random()*3)
             f = self.product[random.randrange(len(self.product))]
             q.put(f)
@@ -44,14 +44,6 @@ if __name__ == '__main__':
     ct.start()
 
 
-
-
-#Methodenaufruf
-t=Thread(target=Producer, args=("Producer", ))
-t.start()
-time.sleep(0.1)
-t=Thread(target=Consumer, args=("Consumer", ))
-t.start()
 
 
 
