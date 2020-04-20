@@ -1,104 +1,44 @@
 from threading import Thread
 import time
-prod1 = 0
-prod2 = 0
-cedric = 0
-justin = 0
-markus = 0
-simon = 0
-#Implementiert eine Methode
-def Producer1(x):
-    #System Out
-    print("Start Thread%s" % x)
-    cedric1 = 0
-    for _ in range(20):
-        global cedric
-        global prod1
-        while prod1 != 0:
-            time.sleep(0.1)
-        cedric1 = cedric1 + 1
-        cedric = cedric1
-        prod1 = 1
-        print("prod",cedric)
-    print("Stop Thread%s" % x)
+import random
+import queue
 
-def Producer2(x):
-    #System Out
-    print("Start Thread%s" % x)
-    justin1 = 0
-    for _ in range(20):
-        global justin
-        global prod2
-        while prod2 != 0:
-            time.sleep(0.1)
-        justin1 = justin1 + 1
-        justin = justin1
-        prod2 = 1
-        print("prod",cedric)
-    print("Stop Thread%s" % x)
-    
+class Producer:
+    def __init__(self):
+        self.product = ['Haselnuss', 'Schnitzelbroetchen', 'Senf']
 
-def Consumer1(x):
-    #System Out
-    print("Start Thread%s" % x)
-    for _ in range(10):
-        global cedric
-        global justin
-        global markus
-        global prod1
-        global prod2
-        while cedric == 0:
-            time.sleep(0.1)
-        cedric1 = cedric
-        cedric = 0
-        time.sleep(0.1)
-        while justin == 0:
-            time.sleep(0.1)
-        justin1 = justin
-        justin = 0
-        markus = markus + cedric1 + justin1
-        prod1 = 0
-        prod2 = 0
-        print("cons",markus)
-    print("Stop Thread%s" % x)
-
-def Consumer2(x):
-    #System Out
-    print("Start Thread%s" % x)
-    for _ in range(10):
-        global cedric
-        global justin
-        global simon
-        global prod1
-        global prod2
-        while justin == 0:
-            time.sleep(0.1)
-        justin1 = justin
-        justin = 0
-        time.sleep(0.1)
-        while cedric == 0:
-            time.sleep(0.1)
-        cedric1 = cedric
-        cedric = 0
-        
-        simon = simon+ cedric1 + justin1
-        prod1 = 0
-        prod2 = 0
-        print("cons",markus)
-    print("Stop Thread%s" % x)
+    def run(self):
+        global q
+        while True:
+            #Random Produktionszeit(0-3 sekunden)
+            time.sleep(random.random()*3)
+            f = self.product[random.randrange(len(self.product))]
+            q.put(f)
+            print("Added: {}".format(f))
 
 
+class Consumer:
+    def __init__(self):
+        self.next = 0
+
+    def run(self):
+        global q
+        while True:
+            #Random Cosumzeit(0-2 Sekunden)
+            time.sleep(random.random()*2)
+            print('Queue size: {}'.format(q.qsize()))
+            if (not q.empty()):
+                f = q.get()
+                print("Remove: {}".format(f))
+            else:
+                print('Consumer is waiting for product!')
 
 
-#Methodenaufruf
-t=Thread(target=Producer1, args=("Producer1", ))
-t.start()
-time.sleep(0.1)
-t=Thread(target=Producer2, args=("Producer2", ))
-t.start()
-time.sleep(0.1)
-t=Thread(target=Consumer1, args=("Consumer1", ))
-t.start()
-time.sleep(0.1)
-t=Thread(target=Consumer2, args=("Consumer2", ))
-t.start()
+if __name__ == '__main__':
+    q = queue.Queue(10)
+    p = Producer()
+    c = Consumer()
+    pt = Thread(target=p.run, args = ())
+    ct = Thread(target=c.run, args = ())
+    pt.start()
+    ct.start()
