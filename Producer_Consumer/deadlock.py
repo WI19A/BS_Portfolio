@@ -42,3 +42,5 @@ if __name__ == '__main__':
     ct = Thread(target=c.run, args = ())
     pt.start()
     ct.start()
+
+print("Hallo")
